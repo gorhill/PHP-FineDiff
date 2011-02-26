@@ -89,6 +89,6 @@ $diff_len = strlen($diff->getOpcodes());
 <div class="panecontainer" style="width:99%"><p>Diff <span style="color:gray">(diff: <?php printf('%.3f', $exec_time); ?> sec, rendering: <?php printf('%.3f', $rendering_time); ?> sec, diff len: <?php echo $diff_len; ?> chars)</span></p><div><div class="pane diff" style="white-space:pre-line"><?php
 echo $rendered_diff; ?></div></div>
 </div>
-<p style="margin-top:1em"><a href="index.php">Go to main page</a></p>
+<p style="margin-top:1em"><a href="viewdiff-ex.php">Go to main page</a></p>
 </body>
 </html>
