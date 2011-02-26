@@ -3,8 +3,8 @@ Files
 
 finediff.php : where the FineDiff class is defined
 
-index.php    : demo page, which allows to see opcodes and other stats
-viewdiff.php : demo page, plainly show diff
+viewdiff-ex.php : demo page, render diff in HTML, show opcodes and other stats
+viewdiff.php    : demo page, plainly render diff in HTML
 
 Demo available online at:
 http://www.raymondhill.net/finediff/
