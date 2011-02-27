@@ -1,9 +1,11 @@
 Files
 -----
 
-finediff.php : where the FineDiff class is defined
+finediff.php    : where the FineDiff class is defined
 
 viewdiff-ex.php : demo page, render diff in HTML, show opcodes and other stats
+sample_from.txt : sample text file for demo
+sample_to.txt   : sample text file for demo
 viewdiff.php    : demo page, plainly render diff in HTML
 
 Demo available online at:
