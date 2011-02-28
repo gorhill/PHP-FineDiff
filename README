@@ -6,6 +6,8 @@ finediff.php    : where the FineDiff class is defined
 viewdiff-ex.php : demo page, render diff in HTML, show opcodes and other stats
 sample_from.txt : sample text file for demo
 sample_to.txt   : sample text file for demo
+[Text_Diff]     : required, available at http://download.pear.php.net/package/Text_Diff-1.1.1.tgz
+
 viewdiff.php    : demo page, plainly render diff in HTML
 
 Demo available online at:
