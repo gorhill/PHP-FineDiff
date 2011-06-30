@@ -78,6 +78,8 @@ code {
 	overflow:auto;
 	font: 12px monospace;
 	}
+#htmldiff.onlyDeletions ins {display:none}
+#htmldiff.onlyInsertions del {display:none}
 </style>
 <title>PHP Fine Diff</title>
 <script type="text/javascript">
@@ -95,9 +97,10 @@ _gaq.push(['_trackPageview']);
 </script>
 </head>
 <body>
+<a href="https://github.com/gorhill/PHP-FineDiff"><img style="position:absolute;top:0;right:0;border:0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
 <h1>PHP Fine Diff</h1>
 <div>
-<p>This page demonstrate the <a href="finediff-code.php"><code>FineDiff</code></a> class (as in &ldquo;<b>fine</b> granularity <b>diff</b>&rdquo;) I wrote &ndash; starting from scratch &ndash; to generate a <u>lossless</u> (won't eat your line breaks), <u>compact</u> opcodes string listing the sequence of atomic actions (copy/delete/insert) necessary to transform one string into another (thereafter referred as the &ldquo;From&rdquo; and &ldquo;To&rdquo; string). The &ldquo;To&rdquo; string can be rebuilt by running the opcodes string on the &ldquo;From&rdquo; string. The <code>FineDiff</code> class allows to specify the granularity, and up to character-level granularity is possible, in order to generate the smallest diff possible (at the <i>potential</i> cost of increased CPU cycles.)</p>
+<p style="margin-right:5em">This page demonstrate the <a href="finediff-code.php"><code>FineDiff</code></a> class (as in &ldquo;<b>fine</b> granularity <b>diff</b>&rdquo;) I wrote &ndash; starting from scratch &ndash; to generate a <u>lossless</u> (won't eat your line breaks), <u>compact</u> opcodes string listing the sequence of atomic actions (copy/delete/insert) necessary to transform one string into another (thereafter referred as the &ldquo;From&rdquo; and &ldquo;To&rdquo; string). The &ldquo;To&rdquo; string can be rebuilt by running the opcodes string on the &ldquo;From&rdquo; string. The <code>FineDiff</code> class allows to specify the granularity, and up to character-level granularity is possible, in order to generate the smallest diff possible (at the <i>potential</i> cost of increased CPU cycles.)</p>
 <p>Typical usage:</p>
 <p class="code">
 include '<a href="finediff-code.php">finediff.php</a>';<br>
@@ -276,9 +279,27 @@ else {
 <b>Diff opcodes (<span style="border:1px solid #ccc;display:inline-block;width:16px">&nbsp;</span>=copy, <span class="del" style="display:inline-block;width:16px">&nbsp;</span>=delete, <span class="ins" style="display:inline-block;width:16px">&nbsp;</span>=insert, <span class="rep" style="display:inline-block;width:16px">&nbsp;</span>=replace):</b>
 <div style="margin:2px 0 2px 0;border:0;border-top:1px dotted #aaa;padding-top:4px;word-wrap:break-word"><?php echo $opcodes; ?></div>
 </div></div></div>
-<div class="panecontainer"><p>Rendered Diff:</p><div><div class="pane" style="white-space:pre-line"><?php
-echo $rendered_diff; ?></div></div>
-</div>
+<div class="panecontainer"><p>Rendered Diff:&emsp;<span style="font-size:smaller">Show <input type="radio" name="htmldiffshow" onclick="setHTMLDiffVisibility('deletions');">Deletions only&ensp;<input type="radio" name="htmldiffshow" checked="checked" onclick="setHTMLDiffVisibility();">All&ensp;<input type="radio" name="htmldiffshow" onclick="setHTMLDiffVisibility('insertions');">Insertions only</span></p>
+	<div id="htmldiff">
+		<div class="pane" style="white-space:pre-line"><?php echo $rendered_diff; ?></div>
+		</div>
+	</div>
+<script>
+<!--
+function setHTMLDiffVisibility(what) {
+	var htmldiffEl = document.getElementById('htmldiff');
+	if ( what === 'deletions' ) {
+		htmldiffEl.className = 'onlyDeletions';
+		}
+	else if ( what === 'insertions' ) {
+		htmldiffEl.className = 'onlyInsertions';
+		}
+	else {
+		htmldiffEl.className = '';
+		}
+	}
+// -->
+</script>
 </div>
 <div style="margin:0.5em 0;border-top:1px solid #ccc;height:2px"></div>
 <div id="notes" style="font:11px sans-serif"><h3 style="margin-top:0">Notes</h3>
