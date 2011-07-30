@@ -284,7 +284,7 @@ else {
 		<div class="pane" style="white-space:pre-line"><?php echo $rendered_diff; ?></div>
 		</div>
 	</div>
-<script>
+<script type="text/javascript">
 <!--
 function setHTMLDiffVisibility(what) {
 	var htmldiffEl = document.getElementById('htmldiff');
