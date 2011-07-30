@@ -69,6 +69,26 @@ function/method:
   FineDiff::renderFromOpcodes($from, $opcodes, $callback);
 
 
+FAQ
+---
+
+* Does it work with UTF-8?
+  As of now, the code assume single-byte characters. To use UTF-8 text, you can
+  always convert the encoding using mb_convert_encoding():
+    ...
+    $from_text = mb_convert_encoding($from_text_utf8, 'HTML_ENTITIES', 'UTF-8');
+    $to_text = mb_convert_encoding($to_text_utf8, 'HTML_ENTITIES', 'UTF-8');
+    $diff_opcodes = FineDiff::getDiffOpcodes($from_text, $to_text);
+    ...
+
+  If ever you want to re-generate the $to_text_utf8 from the $from_text_utf8:
+    ...
+    $from_text = mb_convert_encoding($from_text_utf8, 'HTML_ENTITIES', 'UTF-8');
+    $to_text = FineDiff::renderToTextFromOpcodes($from_text, $diff_opcodes);
+    $to_text_utf8 = mb_convert_encoding($to_text, 'UTF-8', 'HTML_ENTITIES');
+    ....	
+
+
 License
 -------
 
