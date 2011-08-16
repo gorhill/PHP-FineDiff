@@ -44,7 +44,7 @@
 *   // FineDiff::$wordGranularity = word level
 *   // FineDiff::$characterGranularity = character level [default]
 *
-*   $opcodes = new FineDiff::getDiffOpcodes($from_text, $to_text [, $granularityStack = null] );
+*   $opcodes = FineDiff::getDiffOpcodes($from_text, $to_text [, $granularityStack = null] );
 *   // store opcodes for later use...
 *
 *   ...
@@ -671,17 +671,17 @@ class FineDiff {
 
 	private static function renderDiffToHTMLFromOpcode($opcode, $from, $from_offset, $from_len) {
 		if ( $opcode === 'c' ) {
-			echo htmlentities(substr($from, $from_offset, $from_len));
+			echo htmlentities(htmlentities(substr($from, $from_offset, $from_len)));
 			}
 		else if ( $opcode === 'd' ) {
 			$deletion = substr($from, $from_offset, $from_len);
 			if ( strcspn($deletion, " \n\r") === 0 ) {
 				$deletion = str_replace(array("\n","\r"), array('\n','\r'), $deletion);
 				}
-			echo '<del>', htmlentities($deletion), '</del>';
+			echo '<del>', htmlentities(htmlentities($deletion)), '</del>';
 			}
 		else /* if ( $opcode === 'i' ) */ {
- 			echo '<ins>', htmlentities(substr($from, $from_offset, $from_len)), '</ins>';
+ 			echo '<ins>', htmlentities(htmlentities(substr($from, $from_offset, $from_len))), '</ins>';
 			}
 		}
 	}
