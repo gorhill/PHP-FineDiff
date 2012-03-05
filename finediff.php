@@ -392,21 +392,21 @@ class FineDiff {
 		$has_next_stage = $this->stackpointer < count($this->granularityStack);
 		foreach ( FineDiff::doFragmentDiff($from_segment, $to_segment, $delimiters) as $fragment_edit ) {
 			// increase granularity
-			if ( $fragment_edit instanceof fineDiffReplaceOp && $has_next_stage ) {
+			if ( $fragment_edit instanceof FineDiffReplaceOp && $has_next_stage ) {
 				$this->_processGranularity(
 					substr($this->from_text, $this->from_offset, $fragment_edit->getFromLen()),
 					$fragment_edit->getText()
 					);
 				}
 			// fuse copy ops whenever possible
-			else if ( $fragment_edit instanceof fineDiffCopyOp && $this->last_edit instanceof fineDiffCopyOp ) {
+			else if ( $fragment_edit instanceof FineDiffCopyOp && $this->last_edit instanceof FineDiffCopyOp ) {
 				$this->edits[count($this->edits)-1]->increase($fragment_edit->getFromLen());
 				$this->from_offset += $fragment_edit->getFromLen();
 				}
 			else {
-				/* $fragment_edit instanceof fineDiffCopyOp */
-				/* $fragment_edit instanceof fineDiffDeleteOp */
-				/* $fragment_edit instanceof fineDiffInsertOp */
+				/* $fragment_edit instanceof FineDiffCopyOp */
+				/* $fragment_edit instanceof FineDiffDeleteOp */
+				/* $fragment_edit instanceof FineDiffInsertOp */
 				$this->edits[] = $this->last_edit = $fragment_edit;
 				$this->from_offset += $fragment_edit->getFromLen();
 				}
@@ -451,10 +451,10 @@ class FineDiff {
 			$to_segment_length = $to_segment_end - $to_segment_start;
 			if ( !$from_segment_length || !$to_segment_length ) {
 				if ( $from_segment_length ) {
-					$result[$from_segment_start * 4] = new fineDiffDeleteOp($from_segment_length);
+					$result[$from_segment_start * 4] = new FineDiffDeleteOp($from_segment_length);
 					}
 				else if ( $to_segment_length ) {
-					$result[$from_segment_start * 4 + 1] = new fineDiffInsertOp(substr($to_text, $to_segment_start, $to_segment_length));
+					$result[$from_segment_start * 4 + 1] = new FineDiffInsertOp(substr($to_text, $to_segment_start, $to_segment_length));
 					}
 				continue;
 				}
@@ -534,11 +534,11 @@ class FineDiff {
 
 			if ( $best_copy_length ) {
 				$jobs[] = array($from_segment_start, $best_from_start, $to_segment_start, $best_to_start);
-				$result[$best_from_start * 4 + 2] = new fineDiffCopyOp($best_copy_length);
+				$result[$best_from_start * 4 + 2] = new FineDiffCopyOp($best_copy_length);
 				$jobs[] = array($best_from_start + $best_copy_length, $from_segment_end, $best_to_start + $best_copy_length, $to_segment_end);
 				}
 			else {
-				$result[$from_segment_start * 4 ] = new fineDiffReplaceOp($from_segment_length, substr($to_text, $to_segment_start, $to_segment_length));
+				$result[$from_segment_start * 4 ] = new FineDiffReplaceOp($from_segment_length, substr($to_text, $to_segment_start, $to_segment_length));
 				}
 			}
 
@@ -574,10 +574,10 @@ class FineDiff {
 			// catch easy cases first
 			if ( !$from_segment_len || !$to_segment_len ) {
 				if ( $from_segment_len ) {
-					$result[$from_segment_start * 4 + 0] = new fineDiffDeleteOp($from_segment_len);
+					$result[$from_segment_start * 4 + 0] = new FineDiffDeleteOp($from_segment_len);
 					}
 				else if ( $to_segment_len ) {
-					$result[$from_segment_start * 4 + 1] = new fineDiffInsertOp(substr($to_text, $to_segment_start, $to_segment_len));
+					$result[$from_segment_start * 4 + 1] = new FineDiffInsertOp(substr($to_text, $to_segment_start, $to_segment_len));
 					}
 				continue;
 				}
