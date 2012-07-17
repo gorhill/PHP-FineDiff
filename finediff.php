@@ -214,6 +214,8 @@ class FineDiff {
 	*/
 	public function __construct($from_text = '', $to_text = '', $granularityStack = null) {
 		// setup stack for generic text documents by default
+		$this->insertions_count = 0;
+		$this->deletions_count = 0;
 		$this->granularityStack = $granularityStack ? $granularityStack : FineDiff::$characterGranularity;
 		$this->edits = array();
 		$this->from_text = $from_text;
@@ -407,8 +409,22 @@ class FineDiff {
 				/* $fragment_edit instanceof FineDiffCopyOp */
 				/* $fragment_edit instanceof FineDiffDeleteOp */
 				/* $fragment_edit instanceof FineDiffInsertOp */
+				/* $fragment_edit instanceof fineDiffReplaceOp */
 				$this->edits[] = $this->last_edit = $fragment_edit;
 				$this->from_offset += $fragment_edit->getFromLen();
+				// increase insertion count
+				if ( $fragment_edit instanceof fineDiffInsertOp ) {
+					$this->insertions_count++;
+					}
+				// increase deletion count
+				else if ( $fragment_edit instanceof fineDiffDeleteOp ) {
+					$this->deletions_count++;
+					}
+				// increase insertion and deletion count
+				else if ( $fragment_edit instanceof fineDiffReplaceOp ) {
+					$this->insertions_count++;
+					$this->deletions_count++;
+					}
 				}
 			}
 		$this->stackpointer--;
