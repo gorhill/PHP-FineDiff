@@ -82,22 +82,9 @@ code {
 #htmldiff.onlyInsertions del {display:none}
 </style>
 <title>PHP Fine Diff</title>
-<script type="text/javascript">
-var _gaq = _gaq || [];
-_gaq.push(['_setAccount', 'UA-5586753-2']);
-_gaq.push(['_trackPageview']);
-(function() {
-	var ga = document.createElement('script');
-	ga.type = 'text/javascript';
-	ga.async = true;
-	ga.src = 'http://www.google-analytics.com/ga.js';
-	var s = document.getElementsByTagName('script')[0];
-	s.parentNode.insertBefore(ga, s);
-	})();
-</script>
 </head>
 <body>
-<a href="https://github.com/gorhill/PHP-FineDiff"><img style="position:absolute;top:0;right:0;border:0;" src="https://d3nwyuy0nl342s.cloudfront.net/img/7afbc8b248c68eb468279e8c17986ad46549fb71/687474703a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub"></a>
+<a href="https://github.com/gorhill/PHP-FineDiff"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>
 <h1>PHP Fine Diff</h1>
 <div>
 <p style="margin-right:5em">This page demonstrate the <a href="finediff-code.php"><code>FineDiff</code></a> class (as in &ldquo;<b>fine</b> granularity <b>diff</b>&rdquo;) I wrote &ndash; starting from scratch &ndash; to generate a <u>lossless</u> (won't eat your line breaks), <u>compact</u> opcodes string listing the sequence of atomic actions (copy/delete/insert) necessary to transform one string into another (thereafter referred as the &ldquo;From&rdquo; and &ldquo;To&rdquo; string). The &ldquo;To&rdquo; string can be rebuilt by running the opcodes string on the &ldquo;From&rdquo; string. The <code>FineDiff</code> class allows to specify the granularity, and up to character-level granularity is possible, in order to generate the smallest diff possible (at the <i>potential</i> cost of increased CPU cycles.)</p>
@@ -281,7 +268,7 @@ else {
 </div></div></div>
 <div class="panecontainer"><p>Rendered Diff:&emsp;<span style="font-size:smaller">Show <input type="radio" name="htmldiffshow" onclick="setHTMLDiffVisibility('deletions');">Deletions only&ensp;<input type="radio" name="htmldiffshow" checked="checked" onclick="setHTMLDiffVisibility();">All&ensp;<input type="radio" name="htmldiffshow" onclick="setHTMLDiffVisibility('insertions');">Insertions only</span></p>
 	<div id="htmldiff">
-		<div class="pane" style="white-space:pre-line"><?php echo $rendered_diff; ?></div>
+		<div class="pane" style="white-space:pre-wrap"><?php echo $rendered_diff; ?></div>
 		</div>
 	</div>
 <script type="text/javascript">
