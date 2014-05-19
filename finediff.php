@@ -220,6 +220,15 @@ class FineDiff {
 		$this->doDiff($from_text, $to_text);
 		}
 
+	/**
+	* Magic __toString() method
+	* ...
+	* Assuming `$diff = new FineDiff($from, $to);`, `echo $diff` will print the HTML diff.
+	*/
+	public function __toString(){
+		return $this->renderDiffToHTML();
+		}
+
 	public function getOps() {
 		return $this->edits;
 		}
