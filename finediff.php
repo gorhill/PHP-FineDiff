@@ -214,7 +214,7 @@ class FineDiff {
 	*/
 	public function __construct($from_text = '', $to_text = '', $granularityStack = null) {
 		// setup stack for generic text documents by default
-		$this->granularityStack = $granularityStack ? $granularityStack : FineDiff::$characterGranularity;
+		$this->granularityStack = $granularityStack ?: FineDiff::$characterGranularity;
 		$this->edits = array();
 		$this->from_text = $from_text;
 		$this->doDiff($from_text, $to_text);
