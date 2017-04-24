@@ -36,7 +36,7 @@ Usage
 The simplest way to create a diff of two strings is as follow:
 
   include 'finediff.php';
-  $opcodes = FineDiff::getDiffOpcodes($from_text, $to_text /, default granularity is set to character */);
+  $opcodes = FineDiff::getDiffOpcodes($from_text, $to_text /*, default granularity is set to character */);
   // store opcodes for later use...
 
 Later, $to_text can be re-created from $from_text using $opcodes as follow:
